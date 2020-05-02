@@ -208,7 +208,7 @@ function bucketSort(array, low, high) {
   for (let i = 0; i < array.length; i++) {
     newArray[array[i] - low] = array[i];
   }
-  const cleaned = newArray.filter(item => item !== null);
+  const cleaned = newArray.filter((item) => item !== null);
   return cleaned;
 }
 
@@ -224,8 +224,55 @@ console.log("after sort -> ", bucketSort(bucketTest, 1, 42));
  * (i.e., without creating a new array).
 */
 
+function shuffle(array, counter = 0) {
+  while (counter < array.length) {
+    let randomIndex = Math.floor(Math.random() * array.length);
+    swap(array, counter, randomIndex);
+    counter++;
+    return shuffle(array, counter);
+  }
+  return array;
+}
+
+const shuffleTest = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 29, 30, 42];
+console.log("sort in place (shuffle) test case: ");
+console.log("data to shuffle -> ", shuffleTest);
+console.log("after shuffle -> ", shuffle(shuffleTest));
+
 /* 8. Sorting books
 
  * Imagine that I gave you 20 books to sort in alphabetical order. Express this as an algorithm 
  * and then implement your algorithm.
 */
+
+function sortBooks(arr) {
+  if (arr.length <= 1) {
+      return arr;
+  }
+
+  const middle = Math.floor(arr.length/2);
+  let left = arr.slice(0, middle);
+  let right = arr.slice(middle, arr.length);
+
+  left = sortBooks(left);
+  right = sortBooks(right);
+  return merge(left, right, arr);
+}
+
+const books = [
+  'Dune',
+  'Cracking the Coding Interview',
+  'Leviathan Wakes',
+  'The Lord of the Rings',
+  'Make: The Best Of',
+  'Kotlin Programming The Big Nerd Ranch Guide',
+  'The Night Angel Trilogy',
+  'Harry Potter',
+  'The Awakened Ape',
+  'Tribe of Mentors',
+  'Sapiens',
+  'Brief Answers to the Big Questions',
+  'The Art of Learning'
+];
+
+console.log('sort books test case :', sortBooks(books));
