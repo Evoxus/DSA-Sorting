@@ -107,6 +107,11 @@ function mergeLinkedList(list1, list2) {
   return head.next;
 }
 
+function mergeSortLinkedList(list) {
+  list.head = mSortLinked(list.head);
+  return list;
+}
+
 // ==========================================================
 
 function qSort(array, start = 0, end = array.length) {
@@ -190,8 +195,7 @@ console.log('mSortLinked test case: ');
 console.log('data before sorting -> ');
 helpers.display(llToSort);
 console.log('data after sorting -> ');
-helpers.display(new LinkedList(mSortLinked(llToSort.head)));
-// helpers.display(mSortLinked(llToSort.head));
+helpers.display(mergeSortLinkedList(llToSort));
 
 /* 6. Bucket sort
 
