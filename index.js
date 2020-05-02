@@ -93,15 +93,15 @@ function merge(left, right, array) {
 function mergeLinkedList(list1, list2) {
   const head = new _Node();
   let current = head;
-  while(list1 !== null && list2 !== null) {
-      if (list1.value < list2.value) {
-          current.next = list1;
-          list1 = list1.next;
-      } else {
-          current.next = list2;
-          list2 = list2.next;
-      }
-      current = current.next;
+  while (list1 !== null && list2 !== null) {
+    if (list1.value < list2.value) {
+      current.next = list1;
+      list1 = list1.next;
+    } else {
+      current.next = list2;
+      list2 = list2.next;
+    }
+    current = current.next;
   }
   current.next = list1 === null ? list2 : list1;
   return head.next;
@@ -191,10 +191,10 @@ function mSortLinked(head) {
   return mergeLinkedList(list1, list2);
 }
 
-console.log('mSortLinked test case: ');
-console.log('data before sorting -> ');
+console.log("mSortLinked test case: ");
+console.log("data before sorting -> ");
 helpers.display(llToSort);
-console.log('data after sorting -> ');
+console.log("data after sorting -> ");
 helpers.display(mergeSortLinkedList(llToSort));
 
 /* 6. Bucket sort
@@ -203,9 +203,20 @@ helpers.display(mergeSortLinkedList(llToSort));
  * and highest values are. You can't use arr.splice(), shift() or unshift() for this exercise.
 */
 
-function bucketSort(array) {
-
+function bucketSort(array, low, high) {
+  const newArray = [];
+  for (let i = 0; i < array.length; i++) {
+    newArray[array[i] - low] = array[i];
+  }
+  const cleaned = newArray.filter(item => item !== null);
+  return cleaned;
 }
+
+const bucketTest = [3, 8, 1, 10, 42, 30, 29, 15, 7, 4];
+
+console.log("bucketSort test case: ");
+console.log("data to sort -> ", bucketTest);
+console.log("after sort -> ", bucketSort(bucketTest, 1, 42));
 
 /* 7. Sort in place
 
